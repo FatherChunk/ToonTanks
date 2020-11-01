@@ -3,12 +3,15 @@
 
 #include "PawnTurret.h"
 #include "Kismet/GameplayStatics.h"
+#include "PawnTank.h"
 
 void APawnTurret::BeginPlay()
 {
 	Super::BeginPlay();
 
 	GetWorld()->GetTimerManager().SetTimer(FireRateTimerHandle, this, &APawnTurret::CheckFireCondition, FireRate, true);
+
+	PlayerPawn = Cast<APawnTank>(UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
 // Called every frame
@@ -22,10 +25,26 @@ void APawnTurret::Tick(float DeltaTime)
 void APawnTurret::CheckFireCondition()
 {
 	//if player == null || is dead
+	if (!PlayerPawn)
+	{
+		return;
+	}
 
 	//if player is in range then fire
+	if (ReturnDistanceToPlayer() <= FireRange)
+	{
+		// Fire at player
+		UE_LOG(LogTemp, Warning, TEXT("Fire condition success"));
+	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Fire condition checked"));
+}
 
+float APawnTurret::ReturnDistanceToPlayer()
+{
+	if (!PlayerPawn)
+	{
+		return 0.f;
+	}
 
+	return FVector::Dist(PlayerPawn->GetActorLocation(), GetActorLocation());
 }
