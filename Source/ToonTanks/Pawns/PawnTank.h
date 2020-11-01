@@ -29,9 +29,13 @@ private:
 	void CalculateMoveInput(float Value);
 	void CalculateRotateInput(float Value);
 
-	float MoveSpeed = 100.f;
-	float RotateSpeed = 50.f;
+	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TankSpeed", meta = (AllowPrivateAccess = "true"))
+	float MoveSpeed = 100.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "TankSpeed", meta = (AllowPrivateAccess = "true"))
+	float RotateSpeed = 50.f;
+	
 
 	void Move();
 	void Rotate();
