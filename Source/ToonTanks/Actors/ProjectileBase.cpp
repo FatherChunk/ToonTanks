@@ -5,6 +5,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GamePlayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectileBase::AProjectileBase()
@@ -21,6 +22,8 @@ AProjectileBase::AProjectileBase()
 	ProjectileMovement->MaxSpeed = MovementSpeed;
 	InitialLifeSpan = 3.0f;
 
+	ParticleTrail = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Projectile Trail"));
+	ParticleTrail->SetupAttachment(RootComponent);
 
 }
 
