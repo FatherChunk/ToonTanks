@@ -30,6 +30,7 @@ void APawnTank::HandleDestruction()
 {
 	Super::HandleDestruction();
 	// hide player TODO new function for this
+	Destroy();
 }
 
 // Called every frame
